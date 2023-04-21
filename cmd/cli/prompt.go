@@ -106,7 +106,6 @@ func initialGame(reader *bufio.Reader) {
 				log.Fatal("Terjadi kesalahan. Silakan ulangi permainan.")
 			}
 			player := strings.ToUpper(strings.TrimSuffix(input, "\n"))
-			fmt.Println(player)
 			players = append(players, player)
 		}
 		playersIsValid = pkg.NewScoreboard(players)
@@ -168,8 +167,8 @@ func prompt() {
 			listOfCommands()
 		} else if len(commands) == 4 && commands[0] == "ADD" && commands[1] == "SCORE" {
 			validateAndAddScore(commands[2], commands[3])
-		} else if len(commands) == 4 && commands[0] == "ADD" && commands[1] == "WORD" {
-			addWord(commands[2], commands[3])
+		} else if len(commands) >= 4 && commands[0] == "ADD" && commands[1] == "WORD" {
+			addWord(commands[2], strings.Join(commands[3:], " "))
 		} else if len(commands) == 2 && commands[0] == "PRINT" && commands[1] == "SCOREBOARD" {
 			printScoreboard()
 		} else if len(commands) == 2 && commands[0] == "PRINT" && commands[1] == "DICTIONARY" {
